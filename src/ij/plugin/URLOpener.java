@@ -21,7 +21,7 @@ public class URLOpener implements PlugIn {
 		a file name, opens the image with that name from the 'images.location'
 		URL in IJ_Props.txt. If it is blank, prompts for an image
 		URL and open the specified image. */
-	@Override
+	
 	public void run(String urlOrName) {
 		if (!urlOrName.equals("")) {
 			if (urlOrName.equals("cache"))

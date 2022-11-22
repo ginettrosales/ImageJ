@@ -9,7 +9,7 @@ import ij.measure.Calibration;
 import java.awt.*;
 
 /** This plugin implements the Edit/Options/Appearance command. */
-public class AppearanceOptions implements PlugIn, DialogListener {
+public class AppearanceOptions implements  DialogListener {
 	private boolean interpolate = Prefs.interpolateScaledImages;
 	private boolean open100 = Prefs.open100Percent;
 	private boolean black = Prefs.blackCanvas;
@@ -21,7 +21,7 @@ public class AppearanceOptions implements PlugIn, DialogListener {
 	private double saveScale = Prefs.getGuiScale();
 	private boolean redrawn, repainted;
 
-	@Override
+	
  	public void run(String arg) {
  		showDialog();
  	}

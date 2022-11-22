@@ -27,7 +27,7 @@ public class Benchmark implements PlugIn {
     private int ops = 62;
     private int counter;
 
-    @Override
+    
     public void run(String arg) {
     	ImagePlus cImp = WindowManager.getCurrentImage();
     	if (cImp!=null && cImp.getWidth()==512 && cImp.getHeight()==512 && cImp.getBitDepth()==24) {

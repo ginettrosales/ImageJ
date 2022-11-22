@@ -360,7 +360,7 @@ public class HistogramPlot extends ImagePlus {
 		return values;
 	}
 	
-    @Override
+    
     public void show() {
 		if (IJ.isMacro()&&Interpreter.isBatchMode())
 			super.show();

@@ -18,7 +18,7 @@ public class WandToolOptions implements PlugIn, DialogListener {
 	private static int startx, starty;
 	private static int ID;
 
-	@Override
+	
  	public void run(String arg) {
  		imp = WindowManager.getCurrentImage();
  		Roi roi = imp!=null?imp.getRoi():null;

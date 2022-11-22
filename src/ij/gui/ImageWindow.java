@@ -722,7 +722,7 @@ public class ImageWindow extends Frame implements FocusListener, WindowListener,
 		pack();
 	}
 	
-    @Override
+    
     public void setLocation(int x, int y) {
     	super.setLocation(x, y);
 		initialLoc = null;

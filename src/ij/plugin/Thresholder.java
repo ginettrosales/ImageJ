@@ -37,7 +37,7 @@ public class Thresholder implements PlugIn, Measurements, ItemListener {
 	private ImagePlus imp;
 	private Vector choices;
 
-	@Override
+	
 	public void run(String arg) {
 		convertToMask = arg.equals("mask");
 		if (arg.equals("skip") || convertToMask)

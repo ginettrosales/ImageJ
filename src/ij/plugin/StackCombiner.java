@@ -52,6 +52,10 @@ public class StackCombiner implements PlugIn {
 	}
 	
 	public ImageStack combineHorizontally(ImageStack stack1, ImageStack stack2) {
+		return funcdupl( stack1,  stack2);
+	}
+	
+	private ImageStack funcdupl(ImageStack stack1, ImageStack stack2) {
 		int d1 = stack1.getSize();
 		int d2 = stack2.getSize();
 		int d3 = Math.max(d1, d2);
@@ -87,38 +91,7 @@ public class StackCombiner implements PlugIn {
 	}
 	
 	public ImageStack combineVertically(ImageStack stack1, ImageStack stack2) {
-		int d1 = stack1.getSize();
-		int d2 = stack2.getSize();
-		int d3 = Math.max(d1, d2);
-		int w1 = stack1.getWidth();
-		int h1 = stack1.getHeight();
- 		int w2 = stack2.getWidth();
-		int h2 = stack2.getHeight();
-		int w3 = Math.max(w1, w2);
-		int h3 = h1 + h2;
-		ImageStack stack3 = new ImageStack(w3, h3, stack1.getColorModel());
-		ImageProcessor ip = stack1.getProcessor(1);
-		ImageProcessor ip1, ip2, ip3;
- 		Color background = Toolbar.getBackgroundColor();
- 		for (int i=1; i<=d3; i++) {
- 			IJ.showProgress((double)i/d3);
- 			ip3 = ip.createProcessor(w3, h3);
-			if (w1!=w2) {
- 				ip3.setColor(background);
- 				ip3.fill();
-			}
-			if  (i<=d1) {
-				ip3.insert(stack1.getProcessor(1),0,0);
-				if (stack2!=stack1)
-					stack1.deleteSlice(1);
-			}
-			if  (i<=d2) {
-				ip3.insert(stack2.getProcessor(1),0,h1);
-				stack2.deleteSlice(1);
-			}
-		stack3.addSlice(null, ip3);
-		}
-		return stack3;
+		return funcdupl( stack1,  stack2);
 	}
 
 	boolean showDialog() {

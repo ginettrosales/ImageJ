@@ -6,7 +6,7 @@ import ij.*;
 import ij.plugin.*;
 
 /**  This is a non-modal dialog that plugins can extend. */
-public class PlugInDialog extends Dialog implements PlugIn, WindowListener, FocusListener {
+public class PlugInDialog extends Dialog implements WindowListener, FocusListener {
 
 	public PlugInDialog(String title) {
 		super(IJ.isMacOSX()?IJ.getInstance():null,title);
@@ -26,8 +26,7 @@ public class PlugInDialog extends Dialog implements PlugIn, WindowListener, Focu
 		}
 	}
 	
-	public void run(String arg) {
-	}
+
 	
     public void windowClosing(WindowEvent e) {
     	if (e.getSource()==this) {

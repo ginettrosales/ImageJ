@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 /** Displays the ImageJ "Channels" dialog. */
-public class Channels extends PlugInDialog implements PlugIn, ItemListener, ActionListener {
+public class Channels extends PlugInDialog implements ItemListener, ActionListener {
 
 	private static final String[] modes = {"Composite", "Color", "Grayscale", "---------",
 		"Composite Max", "Composite Min", "Composite Invert"};

@@ -6,7 +6,7 @@ import java.util.*;
 
 /** This plugin implements the Edit/Options/Fonts command and 
 	the dialog displayed when you double click on the text tool. */
-public class Text implements PlugIn, DialogListener {
+public class Text implements  DialogListener {
 	private static final String LOC_KEY = "fonts.loc";
 	private static final String[] styles = {"Plain", "Bold", "Italic", "Bold+Italic"};
 	private static final String[] justifications = {"Left", "Center", "Right"};

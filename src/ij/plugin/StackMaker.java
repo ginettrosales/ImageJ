@@ -10,7 +10,7 @@ import ij.util.Tools;
 	This is the opposite of what the "Make Montage" command does.
 	2010.04.20,TF: Final stack can be cropped to remove border around frames.
 */
-public class StackMaker implements PlugIn {
+public class StackMaker {
 	private int rows;
 	private int columns;
 	private int border;

@@ -43,7 +43,7 @@ public class BMP_Writer implements PlugIn {
  private BufferedOutputStream bfo;
  ImagePlus imp;
 
- @Override
+ 
  public void run(String path) {
    IJ.showProgress(0);
    imp = WindowManager.getCurrentImage();

@@ -7,7 +7,7 @@ import ij.gui.*;
 import ij.process.*;
 
 /** Implements ImageJ's Paste Control window. */
-public class PasteController extends PlugInFrame implements PlugIn, ItemListener {
+public class PasteController extends PlugInFrame implements  ItemListener {
 
 	private Panel panel;
 	private Choice pasteMode;

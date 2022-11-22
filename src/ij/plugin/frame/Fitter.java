@@ -21,7 +21,7 @@ import ij.measure.*;
  *
  * 2013-10-01: fit not in EventQueue, setStatusAndEsc, error if nonnumeric data
  */
-public class Fitter extends PlugInFrame implements PlugIn, ItemListener, ActionListener, KeyListener, ClipboardOwner {
+public class Fitter extends PlugInFrame implements ItemListener, ActionListener, KeyListener, ClipboardOwner {
 
 	Choice fit;
 	Button doIt, open, apply;

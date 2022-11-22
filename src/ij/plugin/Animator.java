@@ -7,7 +7,7 @@ import ij.plugin.frame.Recorder;
 import java.awt.Point;
 
 /** This plugin animates stacks. */
-public class Animator implements PlugIn {
+public class Animator  {
 
 	private static double animationRate = Prefs.getDouble(Prefs.FPS, 7.0);
 	private static int firstFrame=0, lastFrame=0;
@@ -20,7 +20,7 @@ public class Animator implements PlugIn {
 		Set it to "stop" to stop animation. Set it to "next" or "previous"
 		to stop any animation and display the next or previous frame. 
 	*/
-	@Override
+	
 	public void run(String arg) {
 		imp = IJ.getImage();
 		nSlices = imp.getStackSize();

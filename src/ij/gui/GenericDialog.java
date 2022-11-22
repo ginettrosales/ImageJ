@@ -1921,7 +1921,7 @@ FocusListener, ItemListener, KeyListener, AdjustmentListener, WindowListener {
 			this.text = text;
 		}
 
-		@Override
+		
 		public void drop(DropTargetDropEvent event) {
 			try {
 				text.setText(getString(event));

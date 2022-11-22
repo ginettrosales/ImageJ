@@ -297,7 +297,7 @@ public class AVI_Reader extends VirtualStack implements PlugIn {
 	 *	retrieved with getImagePlus().
 	 */
 	
-	@Override
+	
 	public void run (String arg) {
 		String options = IJ.isMacro()?Macro.getOptions():null;
 		if (options!=null && options.contains("select=") && !options.contains("open="))

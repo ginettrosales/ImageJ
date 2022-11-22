@@ -37,7 +37,7 @@ public class ZAxisProfiler implements PlugIn, Measurements, PlotMaker {
 		return plot;
 	}
 
-	@Override
+	
 	public void run(String arg) {
 		imp = IJ.getImage();
 		if (imp.getStackSize()<2) {

@@ -14,7 +14,7 @@ import ij.process.*;
 import ij.measure.*;
 
 /** This is ImageJ's macro recorder. */
-public class Recorder extends PlugInFrame implements PlugIn, ActionListener, ImageListener, ItemListener {
+public class Recorder extends PlugInFrame implements  ActionListener, ImageListener, ItemListener {
 
 	/** This variable is true if the recorder is running. */
 	public static boolean record;

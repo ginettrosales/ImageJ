@@ -10,11 +10,11 @@ import java.awt.image.*;
 	/** This plugin implements the Help/About ImageJ command by opening
 	 * about.jpg in ij.jar, scaling it 600% and adding text to an overlay.
 	*/
-	public class AboutBox implements PlugIn {
+	public class AboutBox  {
 		private static final int SMALL_FONT=20, LARGE_FONT=45;
 		private static final Color TEXT_COLOR = new Color(255,255,80);
 	
-	@Override
+	
 	public void run(String arg) {
 		System.gc();
 		int lines = 7;

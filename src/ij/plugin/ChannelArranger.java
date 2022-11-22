@@ -14,14 +14,14 @@ import java.util.Vector;
  *
  * @author Norbert Vischer <vischer@science.uva.nl> 23-sep-2012
  */
-public class ChannelArranger implements PlugIn, TextListener {
+public class ChannelArranger implements TextListener {
 	private ThumbnailsCanvas thumbNails;
 	private String patternString;
 	private String allowedDigits;
 	private TextField orderField;
 	private int nChannels;
 
-	@Override
+
 	public void run(String arg) {
 		ImagePlus imp = IJ.getImage();
 		nChannels = imp.getNChannels();

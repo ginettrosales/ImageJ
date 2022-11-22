@@ -79,7 +79,7 @@ public class Zoom implements PlugIn {
 			IJ.log("Zoom: "+ count+" "+imp.windowActivated()+" "+isCanvas+" "+imp);
     }
 
-	@Override
+	
 	public void run(String arg) {
 		ImagePlus imp = WindowManager.getCurrentImage();
 		if (imp==null) {

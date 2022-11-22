@@ -5,7 +5,7 @@ import ij.*;
 import ij.plugin.*;
 
 /**  This is a closeable window that plugins can extend. */
-public class PlugInFrame extends Frame implements PlugIn, WindowListener, FocusListener {
+public class PlugInFrame extends Frame implements  WindowListener, FocusListener {
 
 	String title;
 	
@@ -24,8 +24,7 @@ public class PlugInFrame extends Frame implements PlugIn, WindowListener, FocusL
 		}
 	}
 	
-	public void run(String arg) {
-	}
+
 	
     public void windowClosing(WindowEvent e) {
     	if (e.getSource()==this) {

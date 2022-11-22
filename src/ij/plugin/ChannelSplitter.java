@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.Vector;
 
 /** This plugin implements the Image/Color/Split Channels command. */
-public class ChannelSplitter implements PlugIn {
+public class ChannelSplitter  {
 
 	public void run(String arg) {
 		ImagePlus imp = IJ.getImage();

@@ -44,7 +44,7 @@ import ij.plugin.filter.ThresholdToSelection;
  */
 
 /**  Selects pixels according to hsb or rgb components.  */
-public class ColorThresholder extends PlugInFrame implements PlugIn, Measurements,
+public class ColorThresholder extends PlugInFrame implements  Measurements,
  ActionListener, AdjustmentListener, FocusListener, ItemListener, Runnable{
 
 	private static final int HSB=0, RGB=1, LAB=2, YUV=3;

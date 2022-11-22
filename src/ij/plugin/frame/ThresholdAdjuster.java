@@ -15,7 +15,7 @@ import ij.plugin.Thresholder;
 
 /** Adjusts the lower and upper threshold levels of the active image. This
 	class is multi-threaded to provide a more responsive user interface. */
-public class ThresholdAdjuster extends PlugInDialog implements PlugIn, Measurements, Runnable,
+public class ThresholdAdjuster extends PlugInDialog implements Measurements, Runnable,
 	ActionListener, AdjustmentListener, ItemListener, FocusListener, KeyListener, MouseWheelListener, ImageListener {
 
 	public static final String LOC_KEY = "threshold.loc";

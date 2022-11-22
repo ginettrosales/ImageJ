@@ -12,7 +12,7 @@ public class StackConverter {
 	ImagePlus imp;
 	int type, nSlices, width, height;
 
-	public StackConverter(ImagePlus imp) {
+	public StackConverter(ImagePlus imp) {	
 		this.imp = imp;
 		type = imp.getType();
 		nSlices = imp.getStackSize();
@@ -76,6 +76,11 @@ public class StackConverter {
 		}
 		imp.setSlice(currentSlice);
 		IJ.showProgress(1.0);
+	}
+	
+	private void throwEx() {
+		if (type!=ImagePlus.COLOR_RGB)
+			throw new IllegalArgumentException("RGB stack required");
 	}
 
 	/** Converts an RGB or 8-bit color stack to 8-bit grayscale. */
@@ -224,16 +229,18 @@ public class StackConverter {
 	/** Converts the stack (which must be RGB) to a 
 		3 channel (red, green and blue) hyperstack. */
 	public void convertToRGBHyperstack() {
-		if (type!=ImagePlus.COLOR_RGB)
-			throw new IllegalArgumentException("RGB stack required");
+		throwEx();
 		new ij.plugin.CompositeConverter().run("composite");
 	}
 
 	/** Converts the stack (which must be RGB) to a 3 channel 
 		(hue, saturation and brightness) hyperstack. */
 	public void convertToHSBHyperstack() {
-		if (type!=ImagePlus.COLOR_RGB)
-			throw new IllegalArgumentException("RGB stack required");
+		fucdupli();
+	}
+	
+	private void fucdupli() {
+		throwEx();
 		ImageStack stack1 = imp.getStack();
 		ImageStack stack2 = new ImageStack(width,height);
 		int nSlices = stack1.getSize();
@@ -260,45 +267,19 @@ public class StackConverter {
 		CompositeImage ci = new CompositeImage(imp, IJ.GRAYSCALE);
 		ci.show();
 		imp.hide();
+		
 	}
 
 	/** Converts the stack (which must be RGB) to a 3 channel 
 		(hue, saturation and brightness) 32-bit hyperstack. */
 	public void convertToHSB32Hyperstack() {
-		if (type!=ImagePlus.COLOR_RGB)
-			throw new IllegalArgumentException("RGB stack required");
-		ImageStack stack1 = imp.getStack();
-		ImageStack stack2 = new ImageStack(width,height);
-		int nSlices = stack1.getSize();
-		Calibration cal = imp.getCalibration();
-		int inc = nSlices/20;
-		if (inc<1) inc = 1;
-		for(int i=1; i<=nSlices; i++) {
-			String label = stack1.getSliceLabel(i);
-			ColorProcessor cp = (ColorProcessor)stack1.getProcessor(i);
-			ImageStack stackHSB = cp.getHSB32Stack();
-			stack2.addSlice(label,stackHSB.getProcessor(1));
-			stack2.addSlice(label,stackHSB.getProcessor(2));
-			stack2.addSlice(label,stackHSB.getProcessor(3));
-			if ((i%inc)==0) {
-				IJ.showProgress((double)i/nSlices);
-				IJ.showStatus("Converting to HSB: "+i+"/"+nSlices);
-			}
-		}
-		IJ.showProgress(1.0);
-		imp.setStack(null,stack2);
-		imp.setCalibration(cal);
-		imp.setDimensions(3, nSlices, 1);
-		CompositeImage ci = new CompositeImage(imp, IJ.GRAYSCALE);
-		ci.show();
-		imp.hide();
+		fucdupli();
 	}
 	
 	/** Converts the stack (which must be RGB) to a 3 channel 
 		Lab hyperstack. */
 	public void convertToLabHyperstack() {
-		if (type!=ImagePlus.COLOR_RGB)
-			throw new IllegalArgumentException("RGB stack required");
+		throwEx();
 		if (imp!=null)
 			throw new IllegalArgumentException("Stacks currently not supported");
 	}
@@ -306,8 +287,7 @@ public class StackConverter {
 	/** Converts the stack to 8-bits indexed color. 'nColors' must
 		be greater than 1 and less than or equal to 256. */
 	public void convertToIndexedColor(int nColors) {
-		if (type!=ImagePlus.COLOR_RGB)
-			throw new IllegalArgumentException("RGB stack required");
+		throwEx();
 		ImageStack stack = imp.getStack();
 		int size = stack.size();
 		ImageProcessor montage = new ColorProcessor(width*size, height);

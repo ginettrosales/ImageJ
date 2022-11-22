@@ -114,6 +114,49 @@ public class FolderOpener implements PlugIn, TextListener {
 		run(path);
 		return image;
 	}
+	
+	private void func1(boolean fileInfoStack, ImageStack stack, String[] list, int i, int stackSize, ImagePlus imp, String label, ImageStack inputStack, boolean dicomImages, int width, int height, double min,double max   ) {
+		if (openAsVirtualStack) { 
+			if (fileInfoStack)
+				openAsFileInfoStack((FileInfoVirtualStack)stack, directory+list[i]);
+			else
+				((VirtualStack)stack).addSlice(list[i]);
+		} else {
+			for (int slice=1; slice<=stackSize; slice++) {
+				int bitDepth2 = imp.getBitDepth();
+				String label2 = label;
+				ImageProcessor ip = null;
+				if (stackSize>1) {
+					String sliceLabel = inputStack.getSliceLabel(slice);
+					if (sliceLabel!=null && sliceLabel.length()<=15)
+						label2 += ":"+sliceLabel;
+					else if (label2!=null && !label2.equals(""))
+						label2 += ":"+slice;
+				}
+				ip = inputStack.getProcessor(slice);
+				if (bitDepth2!=bitDepth) {
+					if (dicomImages && bitDepth==16 && bitDepth2==32 && this.scale==100) {
+						ip = ip.convertToFloat();
+						bitDepth = 32;
+						ImageStack stack2 = new ImageStack(width, height, stack.getColorModel());
+						for (int n=1; n<=stack.size(); n++) {
+							ImageProcessor ip2 = stack.getProcessor(n);
+							ip2 = ip2.convertToFloat();
+							ip2.subtract(32768);
+							String sliceLabel = stack.getSliceLabel(n);
+							stack2.addSlice(sliceLabel, ip2.convertToFloat());
+						}
+						stack = stack2;
+					}
+				}
+				if (this.scale<100.0)
+					ip = ip.resize((int)(width*this.scale/100.0), (int)(height*this.scale/100.0));
+				if (ip.getMin()<min) min = ip.getMin();
+				if (ip.getMax()>max) max = ip.getMax();
+				stack.addSlice(label2, ip);
+			}
+		}
+	}
 
 	public void run(String arg) {
 		boolean isMacro = Macro.getOptions()!=null;
@@ -340,46 +383,7 @@ public class FolderOpener implements PlugIn, TextListener {
 						overlay.add(roi);
 					}
 				}				
-				if (openAsVirtualStack) { 
-					if (fileInfoStack)
-						openAsFileInfoStack((FileInfoVirtualStack)stack, directory+list[i]);
-					else
-						((VirtualStack)stack).addSlice(list[i]);
-				} else {
-					for (int slice=1; slice<=stackSize; slice++) {
-						int bitDepth2 = imp.getBitDepth();
-						String label2 = label;
-						ImageProcessor ip = null;
-						if (stackSize>1) {
-							String sliceLabel = inputStack.getSliceLabel(slice);
-							if (sliceLabel!=null && sliceLabel.length()<=15)
-								label2 += ":"+sliceLabel;
-							else if (label2!=null && !label2.equals(""))
-								label2 += ":"+slice;
-						}
-						ip = inputStack.getProcessor(slice);
-						if (bitDepth2!=bitDepth) {
-							if (dicomImages && bitDepth==16 && bitDepth2==32 && this.scale==100) {
-								ip = ip.convertToFloat();
-								bitDepth = 32;
-								ImageStack stack2 = new ImageStack(width, height, stack.getColorModel());
-								for (int n=1; n<=stack.size(); n++) {
-									ImageProcessor ip2 = stack.getProcessor(n);
-									ip2 = ip2.convertToFloat();
-									ip2.subtract(32768);
-									String sliceLabel = stack.getSliceLabel(n);
-									stack2.addSlice(sliceLabel, ip2.convertToFloat());
-								}
-								stack = stack2;
-							}
-						}
-						if (this.scale<100.0)
-							ip = ip.resize((int)(width*this.scale/100.0), (int)(height*this.scale/100.0));
-						if (ip.getMin()<min) min = ip.getMin();
-						if (ip.getMax()>max) max = ip.getMax();
-						stack.addSlice(label2, ip);
-					}
-				}
+				func1( fileInfoStack,  stack,  list,  i,  stackSize,  imp,  label,  inputStack,  dicomImages,  width,  height,  min, max);
 				count++;
 				IJ.showStatus("!"+count+"/"+this.nFiles);
 				IJ.showProgress(count, this.nFiles);
@@ -465,35 +469,39 @@ public class FolderOpener implements PlugIn, TextListener {
 		}
 		IJ.showProgress(1.0);
 		if (Recorder.record) {
-			String options = openAsVirtualStack&&!openAsSeparateImages?"virtual":"";
-			if (bitDepth!=defaultBitDepth)
-				options = options + " bitdepth=" + bitDepth;				
-			if (filter!=null && filter.length()>0) {
-				if (filter.contains(" "))
-					filter = "["+filter+"]";
-				options = options + " filter=" + filter;
-			}
-			if (start!=1)
-				options = options + " start=" + start;				
-			if (step!=1)
-				options = options + " step=" + step;				
-			if (scale!=100)
-				options = options + " scale=" + scale;				
-			if (!sortByMetaData)
-				options = options + " noMetaSort";
-			if (!Recorder.scriptMode() && openAsSeparateImages)
-				options = options + " open";
-			String dir = Recorder.fixPath(directory);
-			if (Recorder.scriptMode())
-   				Recorder.recordCall("imp = FolderOpener.open(\""+dir+"\", \""+options+"\");");
-   			else {
-   				if (options.length()==0)
-   					Recorder.recordString("File.openSequence(\""+dir+"\");\n");
-   				else
-   					Recorder.recordString("File.openSequence(\""+dir+"\", \""+options+"\");\n");
-   				Recorder.disableCommandRecording();
-   			}
+			func2(); 
 		}
+	}
+	
+	public void  func2() {
+		String options = openAsVirtualStack&&!openAsSeparateImages?"virtual":"";
+		if (bitDepth!=defaultBitDepth)
+			options = options + " bitdepth=" + bitDepth;				
+		if (filter!=null && filter.length()>0) {
+			if (filter.contains(" "))
+				filter = "["+filter+"]";
+			options = options + " filter=" + filter;
+		}
+		if (start!=1)
+			options = options + " start=" + start;				
+		if (step!=1)
+			options = options + " step=" + step;				
+		if (scale!=100)
+			options = options + " scale=" + scale;				
+		if (!sortByMetaData)
+			options = options + " noMetaSort";
+		if (!Recorder.scriptMode() && openAsSeparateImages)
+			options = options + " open";
+		String dir = Recorder.fixPath(directory);
+		if (Recorder.scriptMode())
+				Recorder.recordCall("imp = FolderOpener.open(\""+dir+"\", \""+options+"\");");
+			else {
+				if (options.length()==0)
+					Recorder.recordString("File.openSequence(\""+dir+"\");\n");
+				else
+					Recorder.recordString("File.openSequence(\""+dir+"\", \""+options+"\");\n");
+				Recorder.disableCommandRecording();
+			}
 	}
 	
 	private void error(String msg) {

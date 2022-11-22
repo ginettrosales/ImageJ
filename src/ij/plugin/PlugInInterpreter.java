@@ -1,7 +1,7 @@
 package ij.plugin;
 
 /** Plugins that run scripts (e.g., BeanShell, Jython) extend this class. */
-public abstract class PlugInInterpreter implements PlugIn {
+public abstract class PlugInInterpreter  {
 
 	/** Run script on separate thread. */
 	public void run(String script) {

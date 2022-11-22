@@ -20,7 +20,7 @@ public class XYCoordinates implements PlugIn {
 	private static boolean invertY;
 	private static boolean suppress;
 
-	@Override
+	
 	public void run(String arg) {
 		ImagePlus imp = IJ.getImage();
 		Roi roi = imp.getRoi();

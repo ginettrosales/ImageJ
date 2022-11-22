@@ -13,7 +13,7 @@ import ij.plugin.TextReader;
 */
 public class XY_Reader implements PlugIn {
 
-	@Override
+	
 	public void run(String arg) {
 		TextReader tr = new TextReader();
 		ImageProcessor ip = tr.open();

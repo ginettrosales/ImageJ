@@ -11,7 +11,7 @@ import ij.plugin.frame.Recorder;
 import ij.util.Tools;
 
 /** Adjusts the width of line selections.  */
-public class LineWidthAdjuster extends PlugInFrame implements PlugIn,
+public class LineWidthAdjuster extends PlugInFrame implements 
 	Runnable, AdjustmentListener, TextListener, ItemListener {
 
 	public static final String LOC_KEY = "line.loc";

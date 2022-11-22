@@ -22,7 +22,7 @@ import java.io.*;
 		private TextField inputDir, outputDir;
 		private GenericDialog gd;
 		
-	@Override
+	
 	public void run(String arg) {
 		if (!showDialog())
 			return;
