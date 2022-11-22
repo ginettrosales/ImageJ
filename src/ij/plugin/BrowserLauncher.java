@@ -57,6 +57,7 @@ public class BrowserLauncher implements PlugIn {
 
 
 	/** Opens the specified URL (default is the ImageJ home page). */
+	@Override
 	public void run(String theURL) {
 		if (error) return;
 		if (theURL==null || theURL.equals(""))

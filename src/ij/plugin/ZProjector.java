@@ -128,6 +128,7 @@ public class ZProjector implements PlugIn {
 		return projImage; 
     }
 
+    @Override
     public void run(String arg) {
 		ImagePlus img = IJ.getImage();
 		if (img==null) {

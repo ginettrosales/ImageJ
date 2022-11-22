@@ -21,7 +21,8 @@ import java.io.*;
 		private Button input, output;
 		private TextField inputDir, outputDir;
 		private GenericDialog gd;
-
+		
+	@Override
 	public void run(String arg) {
 		if (!showDialog())
 			return;

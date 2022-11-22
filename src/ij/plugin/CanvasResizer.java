@@ -13,6 +13,7 @@ import java.awt.*;
 public class CanvasResizer implements PlugIn {
 	boolean zeroFill = Prefs.get("resizer.zero", false);
 
+	@Override
 	public void run(String arg) {
 		int wOld, hOld, wNew, hNew;
 		boolean fIsStack = false;

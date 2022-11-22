@@ -9,6 +9,7 @@ public class ArrowToolOptions implements PlugIn, DialogListener {
 	private static GenericDialog gd;
 	private static final String LOC_KEY = "arrows.loc";
 
+	@Override
  	public void run(String arg) {
  		if (gd!=null && gd.isVisible())
  			gd.toFront();

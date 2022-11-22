@@ -12,6 +12,7 @@ import javax.swing.SwingUtilities;
 */
 public class ThreadLister implements PlugIn {
 
+	@Override
 	public void run(String arg) {
 		if (IJ.getApplet()!=null)
 			return;

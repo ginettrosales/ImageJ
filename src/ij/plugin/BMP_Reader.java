@@ -15,6 +15,7 @@ import ij.io.*;
         */
 public class BMP_Reader extends ImagePlus implements PlugIn {
 
+		@Override
         public void run(String arg) {
                 OpenDialog od = new OpenDialog("Open BMP...", arg);
                 String directory = od.getDirectory();

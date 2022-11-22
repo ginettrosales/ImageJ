@@ -61,6 +61,7 @@ import java.util.Vector;
 		private String filter;
 		private static boolean saveOutput = true;
 
+	@Override
 	public void run(String arg) {
 		if (arg.equals("stack")) {
 			virtualStack = IJ.getImage();

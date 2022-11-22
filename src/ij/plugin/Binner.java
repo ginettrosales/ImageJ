@@ -20,7 +20,8 @@ public class Binner implements PlugIn {
 	private int xshrink=2, yshrink=2, zshrink=1;
 	private int method = AVERAGE;
 	private float maxValue;
-
+	
+	@Override
 	public void run(String arg) {
 		ImagePlus imp = IJ.getImage();
 		if (!showDialog(imp))

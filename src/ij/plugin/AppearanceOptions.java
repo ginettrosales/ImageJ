@@ -21,6 +21,7 @@ public class AppearanceOptions implements PlugIn, DialogListener {
 	private double saveScale = Prefs.getGuiScale();
 	private boolean redrawn, repainted;
 
+	@Override
  	public void run(String arg) {
  		showDialog();
  	}

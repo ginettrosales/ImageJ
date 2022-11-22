@@ -20,6 +20,7 @@ public class Animator implements PlugIn {
 		Set it to "stop" to stop animation. Set it to "next" or "previous"
 		to stop any animation and display the next or previous frame. 
 	*/
+	@Override
 	public void run(String arg) {
 		imp = IJ.getImage();
 		nSlices = imp.getStackSize();

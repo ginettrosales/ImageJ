@@ -85,6 +85,7 @@ public class CalibrationBar implements PlugIn {
 	int insetPad;
 	boolean decimalPlacesChanged;
 
+	@Override
 	public void run(String arg) {
 		imp = IJ.getImage();
 		if (imp.getBitDepth()==24 || imp.getCompositeMode()==IJ.COMPOSITE) {

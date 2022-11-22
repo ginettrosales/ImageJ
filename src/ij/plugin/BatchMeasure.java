@@ -8,6 +8,7 @@ import java.io.*;
 	which measures all the images in a user-specified folder. */
 	public class BatchMeasure implements PlugIn {
 
+	@Override
 	public void run(String arg) {
 		String dir = IJ.getDirectory("Choose a Folder");
 		if (dir==null) return;

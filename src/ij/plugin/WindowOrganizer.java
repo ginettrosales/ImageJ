@@ -11,6 +11,7 @@ public class WindowOrganizer implements PlugIn {
 	private static final int XSTART=4, YSTART=94, XOFFSET=8, YOFFSET=24,MAXSTEP=200,GAP=2;
 	private int titlebarHeight = IJ.isMacintosh()?40:20;
 
+	@Override
 	public void run(String arg) {
 		if (arg.equals("imagej"))
 			{showImageJ(); return;}

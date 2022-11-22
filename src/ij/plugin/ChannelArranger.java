@@ -21,6 +21,7 @@ public class ChannelArranger implements PlugIn, TextListener {
 	private TextField orderField;
 	private int nChannels;
 
+	@Override
 	public void run(String arg) {
 		ImagePlus imp = IJ.getImage();
 		nChannels = imp.getNChannels();
